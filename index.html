@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Message App</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+    h1 {
+      color: white;
+      text-shadow: 2px 2px 5px #00000055;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid red;
+      border-radius: 10px;
+      outline: none;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: darkred;
+      transform: scale(1.1);
+    }
+    #message {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff0066;
+      text-shadow: 2px 2px 5px white;
+      animation: glow 1.5s infinite alternate;
+      z-index: 10;
+    }
+    @keyframes glow {
+      from { color: #ff0066; }
+      to { color: #ffcc00; }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: red;
+      animation: floatUp 5s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💝 Enter Your Lover's Name 💝</h1>
+  <input type="text" id="loverName" placeholder="Enter name here...">
+  <button onclick="showLove()">Show Love</button>
+  
+  <div id="message"></div>
+
+  <script>
+    function showLove() {
+      let name = document.getElementById("loverName").value;
+      let messageBox = document.getElementById("message");
+      if(name.trim() !== "") {
+        messageBox.innerHTML = `💖 ${name}, I Love You Forever 💖`;
+        startHearts();
+      } else {
+        messageBox.innerHTML = "❌ Please enter a name!";
+      }
+    }
+
+    // Function to create floating hearts
+    function startHearts() {
+      setInterval(() => {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 500);
+    }
+  </script>
+</body>
+</html>
